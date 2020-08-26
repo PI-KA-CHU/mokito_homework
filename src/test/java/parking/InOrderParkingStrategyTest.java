@@ -4,8 +4,9 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mock;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import java.util.List;
+
+import static org.mockito.Mockito.*;
 
 public class InOrderParkingStrategyTest {
 
@@ -47,7 +48,12 @@ public class InOrderParkingStrategyTest {
     public void testPark_givenNoAvailableParkingLot_thenCreateNoSpaceReceipt(){
 
 	    /* Exercise 2: Test park() method. Use Mockito.spy and Mockito.verify to test the situation for no available parking lot */
+        InOrderParkingStrategy inOrderParkingStrategy = spy(new InOrderParkingStrategy());
+        doReturn(new Receipt()).when(inOrderParkingStrategy).createNoSpaceReceipt(any(Car.class));
 
+        inOrderParkingStrategy.park(null,null);
+
+        verify(inOrderParkingStrategy, times(1)).createNoSpaceReceipt(any(Car.class));
     }
 
     @Test
