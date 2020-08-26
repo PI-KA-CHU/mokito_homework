@@ -36,6 +36,13 @@ public class VipParkingStrategyPowerMockTest {
         /* Exercise 6: Write test case for VipParkingStrategy calculateHourlyPrice
          * by using PowerMock to mock static method */
 
+        mockStatic(ParkingLot.class);
+        when(ParkingLot.getBasicHourlyPrice()).thenReturn(20);
+
+        VipParkingStrategy vipParkingStrategy = new VipParkingStrategy();
+        Integer price = vipParkingStrategy.calculateHourlyPrice();
+
+        Assert.assertEquals(Integer.valueOf(40), price);
 
     }
 }
