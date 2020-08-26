@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mock;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.Mockito.*;
@@ -61,6 +62,14 @@ public class InOrderParkingStrategyTest {
 
         /* Exercise 2: Test park() method. Use Mockito.spy and Mockito.verify to test the situation for one available parking lot */
 
+        InOrderParkingStrategy inOrderParkingStrategy = spy(new InOrderParkingStrategy());
+        doReturn(new Receipt()).when(inOrderParkingStrategy).createReceipt(any(ParkingLot.class),any(Car.class));
+
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(new ParkingLot("oocl", 10));
+        inOrderParkingStrategy.park(parkingLots,new Car("Jim"));
+
+        verify(inOrderParkingStrategy, times(1)).createReceipt(any(ParkingLot.class),any(Car.class));
     }
 
     @Test
